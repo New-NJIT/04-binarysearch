@@ -124,7 +124,7 @@ In this exercise, the insertion sort (or bubble sort, if you implemented that in
 Into the `Algorithms.java` file add the following:
 
 ```Java
-   public static <E extends Comparable<E>> void fastSort(E [] array, int begin, int end) {
+   public static <E extends Comparable<E>> void fastSort(E [] array) {
       // In this example, quicksort is called. Do not implement quicksort here! Continue to read the instructions!
       quickSort(array, 0, array.length - 1);
    }
