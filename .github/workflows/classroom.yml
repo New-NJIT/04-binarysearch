@@ -1,0 +1,74 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Find from integer array with linear search
+      id: find-from-integer-array-with-linear-search
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Find from integer array with linear search
+        setup-command: mvn compile
+        command: mvn -Dtest=LinearSearchTests#findFromIntArrayTests test
+        timeout: 10
+    - name: Find from string array the linear way
+      id: find-from-string-array-the-linear-way
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Find from string array the linear way
+        setup-command: mvn compile
+        command: mvn -Dtest=LinearSearchTests#findFromStringArrayTests test
+        timeout: 10
+    - name: Simple search test using binary search
+      id: simple-search-test-using-binary-search
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Simple search test using binary search
+        setup-command: mvn compile
+        command: mvn -Dtest=BinarySearchTests#simpleSearchTest test
+        timeout: 10
+    - name: Search from middle in binary search
+      id: search-from-middle-in-binary-search
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Search from middle in binary search
+        setup-command: mvn compile
+        command: mvn -Dtest=BinarySearchTests#searchFromMiddle test
+        timeout: 10
+    - name: Find from integer array the binary way
+      id: find-from-integer-array-the-binary-way
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Find from integer array the binary way
+        setup-command: mvn compile
+        command: mvn -Dtest=BinarySearchTests#findFromIntArrayTests test
+        timeout: 10
+    - name: Find from string array the binary way
+      id: find-from-string-array-the-binary-way
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Find from string array the binary way
+        setup-command: mvn compile
+        command: mvn -Dtest=BinarySearchTests#findFromStringArrayTests test
+        timeout: 10
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        FIND-FROM-INTEGER-ARRAY-WITH-LINEAR-SEARCH_RESULTS: "${{steps.find-from-integer-array-with-linear-search.outputs.result}}"
+        FIND-FROM-STRING-ARRAY-THE-LINEAR-WAY_RESULTS: "${{steps.find-from-string-array-the-linear-way.outputs.result}}"
+        SIMPLE-SEARCH-TEST-USING-BINARY-SEARCH_RESULTS: "${{steps.simple-search-test-using-binary-search.outputs.result}}"
+        SEARCH-FROM-MIDDLE-IN-BINARY-SEARCH_RESULTS: "${{steps.search-from-middle-in-binary-search.outputs.result}}"
+        FIND-FROM-INTEGER-ARRAY-THE-BINARY-WAY_RESULTS: "${{steps.find-from-integer-array-the-binary-way.outputs.result}}"
+        FIND-FROM-STRING-ARRAY-THE-BINARY-WAY_RESULTS: "${{steps.find-from-string-array-the-binary-way.outputs.result}}"
+      with:
+        runners: find-from-integer-array-with-linear-search,find-from-string-array-the-linear-way,simple-search-test-using-binary-search,search-from-middle-in-binary-search,find-from-integer-array-the-binary-way,find-from-string-array-the-binary-way
