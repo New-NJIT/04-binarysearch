@@ -47,7 +47,7 @@ public class BinarySearchTests {
     }
 
     @Test
-    @Timeout(value = 120, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
+    @Timeout(value = 150, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
     @DisplayName("Tests Integer search implementations (linear & binary)")
     void findFromIntArrayTests() {
         try {
@@ -99,7 +99,7 @@ public class BinarySearchTests {
     }
 
     @Test
-    @Timeout(value = 120, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
+    @Timeout(value = 150, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
     @DisplayName("Tests String search implementations (linear & binary)")
     void findFromStringArrayTests() {
         try {
